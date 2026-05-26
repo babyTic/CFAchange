@@ -7,20 +7,21 @@ export interface CurrencyMeta {
   flag: string;
 }
 
-/** Taux de change relatifs à XOF comme base (1 XOF = X devise) */
 export interface ExchangeRates {
   EUR: number;
   USD: number;
   CAD: number;
 }
 
-/** Snapshot journalier pour l'historique */
 export interface RateSnapshot {
-  date: string; // 'dd/mm' pour affichage, 'yyyy-mm-dd' en storage
+  date: string;
   EUR: number;
   USD: number;
   CAD: number;
 }
+
+// ← Cette ligne manquait dans ton fichier
+export type ChartCurrency = keyof Omit<RateSnapshot, 'date'>;
 
 export type AppStatus = 'loading' | 'live' | 'cached' | 'offline';
 

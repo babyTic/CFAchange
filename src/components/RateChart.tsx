@@ -3,7 +3,7 @@ import {
   AreaChart, Area, XAxis, YAxis,
   Tooltip, ResponsiveContainer, CartesianGrid,
 } from 'recharts';
-import type { RateSnapshot, CurrencyCode } from '../types';
+import type { RateSnapshot, ChartCurrency } from '../types';
 import { CURRENCY_META } from './CurrencyConverter';
 
 interface Props {
@@ -14,7 +14,7 @@ interface TooltipProps {
   active?:  boolean;
   payload?: { value: number }[];
   label?:   string;
-  cur:      CurrencyCode;
+  cur:      ChartCurrency;
 }
 
 function ChartTooltip({ active, payload, label, cur }: TooltipProps) {
@@ -31,7 +31,7 @@ function ChartTooltip({ active, payload, label, cur }: TooltipProps) {
 }
 
 export function RateChart({ history }: Props) {
-  const [cur, setCur] = useState<CurrencyCode>('EUR');
+  const [cur, setCur] = useState<ChartCurrency>('EUR');
 
   const chartData = history
     .map(h => ({
@@ -50,7 +50,7 @@ export function RateChart({ history }: Props) {
           </div>
         </div>
         <div className="ctabs">
-          {(['EUR', 'USD', 'CAD'] as CurrencyCode[]).map(c => (
+          {(['EUR', 'USD', 'CAD'] as ChartCurrency[]).map(c => (
             <button
               key={c}
               className={`ctab${cur === c ? ' on' : ''}`}
